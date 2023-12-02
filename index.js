@@ -50,7 +50,18 @@ app.put('/update/:Id', async (req, res) => {
     }
   });
 
-
+  
+  // DELETE a book by ID
+  app.delete('/delete/:id', async (req, res) => {
+    const ID=req.params.id
+    try {
+       await BookModel.findByIdAndDelete(ID);
+          res.send(`Id ${ID} Deleted`)
+    } catch (error) {
+        console.log(err)
+      res.status(500).json({ error: error.message });
+    }
+  });
 
 
 app.listen(PORT, async() => {
