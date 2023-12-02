@@ -1,20 +1,20 @@
-const mongoose=require("mongoose")
+const mongoose = require("mongoose")
 
 require('dotenv').config()
-const connection=mongoose.connect(process.env.URL)
+const connection = mongoose.connect(process.env.URL)
 
 
-const bookSchema=mongoose.Schema({
-    title: {type:String,required:true},
-  author: {type:String,required:true},
-  genre: {type:String,required:true},
-},{
-    versionKey:false
+const bookSchema = mongoose.Schema({
+    title: { type: String, required: true },
+    author: { type: String, required: true },
+    genre: { type: String, required: true },
+}, {
+    versionKey: false
 })
 
-const BookModel=mongoose.model("book",bookSchema)
+const BookModel = mongoose.model("book", bookSchema)
 
-module.exports={
+module.exports = {
     connection,
     BookModel
 }
