@@ -7,6 +7,8 @@ const app = express();
 const PORT = 4000;
 app.use(express.json());
 
+
+// Get Books Data
 app.get("/books",async(req,res)=>{
 
        try{
@@ -20,7 +22,33 @@ app.get("/books",async(req,res)=>{
 })
 
 
+//Register Books Data
 
+app.post("/post", async (req,res)=>{
+    try{
+
+        const book=new BookModel(req.body)
+        await book.save()
+        res.send("Succesfull Register")
+    }catch(err){
+         console.log(err)
+        res.send({"error":err.message})
+    }
+})
+
+// Update Books Data
+
+app.put('/update/:Id', async (req, res) => {
+     const ID=req.params.Id
+     const payload=req.body
+    try {
+         await BookModel.findByIdAndUpdate({_id:ID},payload);
+      res.send("Books Updated");
+    } catch (err) {
+        console.log(err)
+        res.send({"error":err.message})
+    }
+  });
 
 
 
